@@ -7,7 +7,7 @@ import { store } from "./store/store";
 import App from './App.tsx'
 // css
 import './index.css'
-import './css/iframe-styles.css'
+// import './css/global.css'
 import 'katex/dist/katex.min.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

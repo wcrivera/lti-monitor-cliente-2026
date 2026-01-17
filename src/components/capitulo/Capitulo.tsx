@@ -6,17 +6,13 @@ import Clases from "../clases/Clases";
 import Ayudantias from "../ayudantia/Ayudantias";
 import { useEffect } from "react";
 import { obtenerTemasCapitulo } from "../../store/slices/tema";
-import { useCanvasResize } from '../../hooks/useCanvasResize';
+import Ejercicios from "../ejercicio/Ejercicios";
 
 const Capitulo = () => {
 
     const dispatch = useDispatch<AppDispatch>();
 
     const { capitulo } = useSelector((state: RootState) => state.capitulo);
-    const { temas } = useSelector((state: RootState) => state.tema);
-    const { clases } = useSelector((state: RootState) => state.clase);
-
-    useCanvasResize([capitulo, temas, clases]);
 
     useEffect(() => {
         if (capitulo.id) {
@@ -47,7 +43,7 @@ const Capitulo = () => {
                         id: 'ejercicios',
                         label: 'Ejercicios',
                         icon: Pencil,
-                        content: <div>Contenido de Ejercicio</div>,
+                        content: <Ejercicios />,
                         // url: `/curso/capitulo?user_id=${usuario.id}&course_id=${curso.id}&modulo_id=${modulo_ejercicio.id}`,
                     },
 

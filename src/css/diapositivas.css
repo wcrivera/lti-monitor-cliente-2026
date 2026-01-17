@@ -1,0 +1,638 @@
+
+.my-swal {
+  z-index: 2000!important;
+}
+
+.salir {
+  z-index: 2000!important;
+}
+
+/*********************************************
+*
+*********************************************/
+
+.tituloMini{
+  position: absolute;
+  width: 80%;
+  top: 230px;
+  left: 10%;
+  background-color:#003f85;
+  box-shadow: 0px 5px 15px 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 0px;
+  border-radius: 20px;
+  font-family: 'Zapf-Chancery';
+  font-variant: small-caps;
+  font-size: 2.8em;
+}
+
+/*********************************************
+* PORTADA
+*********************************************/
+
+.katex { font-size: 1.1em; }
+
+/*********************************************
+* PORTADA
+*********************************************/
+
+.logoPIMU{
+  position: absolute;
+  width: 10%;
+  top: 80%;
+  left: 90%;
+}
+
+/*********************************************
+* PORTADA
+*********************************************/
+
+/* en línea */
+
+.titulo{
+  position: absolute;
+  width: 90%; 
+  top: 100px;
+  left: 5%;
+  background-color:#003f85;
+  box-shadow: 0px 5px 15px 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 0px;
+  border-radius: 20px;
+  font-family: 'Zapf-Chancery';
+  font-variant: small-caps;
+  font-size: 1.6em;
+}
+
+.facMat {
+  position:absolute;
+  top: 600px;
+  left: 35%;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.2em;
+}
+
+/*********************************************
+* ENTORNOS
+*********************************************/
+
+definicion {
+  background-color:#fff1f2;
+  box-shadow: 0px 5px 15px 0px;
+  border: 1px solid #ff7800;
+  display: block;
+  text-align: left;
+  padding: 15px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+}
+
+.definicion {
+  color: #c93732;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+}
+
+teorema {
+  background-color:#f2f2ff;
+  box-shadow: 0px 5px 15px 0px;
+  border: 2px solid #9a98c5;
+  display: block;
+  text-align: left;
+  padding: 15px;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+}
+
+.teorema {
+  color: #1500dc;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+}
+
+ejercicio {
+  display: block;
+  text-align: left;
+  padding: 15px;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+}
+
+.ejercicio {
+  color: #00405d;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+  display:inline;
+}
+
+pasos {
+  background-color:#effff1;
+  box-shadow: 0px 5px 15px 0px;
+  border: 1px solid #b2b2d3;
+  display: block;
+  text-align: left;
+  padding: 15px;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+}
+
+.pasos {
+  color: #004f12;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+}
+
+/* en línea */
+
+nota {
+  display: block;
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  border-radius: 15px;
+}
+
+.nota {
+  color: #a44800;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+  display:inline;
+}
+
+ejemplo {
+  display: block;
+  /* text-align: left; */
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  text-align: justify!important
+}
+
+.ejemplo {
+  color: #00405d;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+  display:inline;
+}
+
+solucion {
+  display: block;
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.solucion {
+  color: #00405d;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+  display:inline;
+}
+
+cuerpo {
+  display: block;
+  text-align: justify!important;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.respuesta {
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+/*********************************************
+* LISTA
+*********************************************/
+
+/* ol {
+  list-style-type:none;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  margin-left: 0px;
+  margin-right: 0;
+  padding-left: 25px;
+  padding-right: 15px;
+}
+
+ol.resumenStyle {
+  display:flex;
+  align-items:flex-start;
+} */
+
+/* Lista con numeros */
+
+/* .nList li{
+  list-style-type:none;
+  counter-increment:index1;
+  padding: 6px 0px;
+  margin:0em 0em 0em -0.7em;
+}
+.nList li::before {
+  content:counter(index1,decimal)".";
+  margin:0em 0em 0em -1em;
+  font-weight: bold;color: #002495;
+} */
+
+/* Lista con lower-latin */
+
+/* .aList li{
+  list-style-type:none;
+  counter-increment:index2;
+  padding: 6px 0px;
+}
+.aList li::before {
+  content:"("counter(index2,lower-latin) ")";
+  margin:0em 0.35em 0em -1.7em;
+  font-weight: bold;color: #002495;
+} */
+
+/* Lista con lower-latin */
+
+/* .pList li{
+  list-style-type:none;
+  counter-increment:index3;
+  padding: 6px 0px;
+}
+.pList li::before {
+  content:"P"counter(index3,decimal)".";
+  margin:0em 0.1em 0em -1.7em;
+  font-weight: bold;color: #002495;
+} */
+
+/* Lista con lower-latin */
+
+/* .lList li{
+  list-style-type:none;
+  counter-increment:index4;
+  padding: 6px 0px;
+}
+.lList li::before {
+  content:"L"counter(index4,decimal)".";
+  margin:0em 0.1em 0em -1.7em;
+  font-weight: bold;color: #002495;
+} */
+
+/* Lista con lower-latin */
+
+/* .noList li{
+  list-style-type:none;
+  counter-increment:index4;
+  padding: 15px 0px;
+}
+.noList li::before {
+  content:"";
+  margin:0em 0em 0em -1.7em;
+  font-weight: bold;color: #002495;
+} */
+
+/* Lista para circulo */
+
+/* .circleList li{
+  list-style-type:none;
+  counter-increment:index5;
+  padding: 6px 0px;
+}
+.circleList li::before {
+
+  content:counter(index5,circle);
+  margin:0em 0.35em 0em -1.3em;
+  font-weight: bold;color: #002495;
+} */
+
+/*********************************************
+* TABLAS
+*********************************************/
+/* table.multiChoice td{
+  padding-top: 10px!important;
+  padding-bottom: 10px!important;
+}
+
+table.shadow {
+  border-collapse: collapse;
+  border-radius: 0.5em;
+  overflow: hidden;
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.24);
+}
+
+
+
+table.multiCol{
+  width: 100%;
+  border: 0px solid transparent!important;
+  padding: 0px!important;
+  vertical-align: top!important;
+  margin-top: 10px!important;
+  margin-bottom: 10px!important;
+  text-align: left!important;
+}
+table.multiCol th{
+  border: 0px solid transparent!important;
+  padding: 0px!important;
+  vertical-align: top!important;
+  margin-top: 0px!important;
+  text-align: left!important;
+}
+table.multiCol td{
+  border: 0px solid transparent!important;
+  padding-top: 3px!important;
+  vertical-align: top!important;
+  margin-top: 0px!important;
+  text-align: left!important;
+}
+
+table.table {
+  border: 1px solid gray!important;
+  text-align: center!important;
+}
+table.table th{
+  border: 1px solid gray!important;
+  padding: 10px!important;
+  vertical-align: middle!important;
+  text-align: center!important;
+}
+table.table td{
+  border: 1px solid gray!important;
+  padding: 10px!important;
+  vertical-align: middle!important;
+  text-align: center!important;
+}
+
+table.noBorder{
+  border: 1px solid transparent!important;
+  padding: 8px!important;
+  vertical-align: middle!important;
+  margin-top: 10px!important;
+  text-align: center!important;
+}
+table.noBorder th{
+  border: 1px solid transparent!important;
+  padding: 8px!important;
+  vertical-align: middle!important;
+  margin-top: 10px!important;
+  text-align: center!important;
+}
+table.noBorder td{
+  border: 1px solid transparent!important;
+  padding: 8px!important;
+  vertical-align: middle!important;
+  margin-top: 10px!important;
+  text-align: center!important;
+}
+
+table.leftAlign{
+  text-align: left!important;
+}
+
+table.leftAlign td{
+  text-align: left!important;
+}
+
+table.leftAlign th{
+  text-align: left!important;
+} */
+
+/*********************************************
+* Imagenes
+*********************************************/
+
+img {
+  max-width:100%;
+  border: none!important;
+  box-shadow:none!important;
+  transform: scale(1)
+}
+
+/*********************************************
+* Imagenes
+*********************************************/
+
+span.math.display {
+  display: inline-block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/*********************************************
+* Titulos
+*********************************************/
+
+h3.resumenStyle {
+  font-family: 'Zapf-Chancery';
+  font-variant: small-caps;
+}
+
+h5.resumenStyle {
+  color: #002495;
+}
+
+/*********************************************
+* div
+*********************************************/
+
+p {
+  text-align: left!important;
+}
+
+div.alignLeft {
+  text-align: left!important;
+}
+
+table .alignCenter {
+  text-align: center!important;
+}
+
+table .alignCenter th{
+  text-align: center!important;
+}
+
+table .alignCenter td{
+  text-align: center!important;
+}
+
+/*********************************************
+* iframe
+*********************************************/
+
+iframe {
+  /*  */
+  border-collapse: collapse;
+  /* border: 20px solid #9a98c5; */
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.24);
+  /* border-radius: 0.5em; */
+  /* 
+  overflow: hidden;
+  
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.24); */
+}
+
+/*********************************************
+* rotar 45
+*********************************************/
+
+.rotar{
+  transform: rotate(45deg);
+}
+
+
+
+
+/*********************************************
+* Definicion
+*********************************************/
+
+div .definition {
+  /* display: block; */
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 1.5em;
+} 
+
+div .definition h3 {
+	color: #c93732;
+	font-weight: bold !important;
+	font-family: 'Zapf-Chancery'!important;
+	font-variant: small-caps!important;
+	font-size: 1.2em;
+}
+
+/*********************************************
+* Teorema
+*********************************************/
+
+div .theorem {
+  /* display: block; */
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 1.5em;
+}
+
+div .theorem h3 {
+  color: #1500dc;
+  font-weight: bold!important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.2em;
+}
+
+/*********************************************
+* Ejemplo
+*********************************************/
+
+div .example {
+  /* display: block; */
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 1.5em;
+}
+
+div .example h3 {
+  color: #00405d;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+}
+
+div .example h3, p {
+  display: inline!important;
+}
+
+/*********************************************
+* Nota
+*********************************************/
+
+div .note {
+  /* display: block; */
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 1.5em;
+}
+
+div .note h3 {
+  color: #a44800;
+  font-weight: bold !important;
+  font-family: 'Zapf-Chancery'!important;
+  font-variant: small-caps!important;
+  font-size: 1.1em;
+}
+
+/*********************************************
+* Columnas
+*********************************************/
+
+/* div .row {
+  margin: 0px;
+  margin-bottom: 1em;
+  padding: 0px;
+}
+
+div .row .col-6 {
+  margin: 0px;
+  padding: 0px;
+
+}
+
+div.row.gx-5 p {
+  padding-right: 20px;
+} */
+
+/*********************************************
+* p
+*********************************************/
+
+p {
+  text-align: justify!important;
+  text-justify: inter-word!important;
+  line-height: 1.8!important;
+  /* background: #002495; */
+}

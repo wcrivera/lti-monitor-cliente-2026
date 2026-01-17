@@ -10,8 +10,15 @@ import Latex from 'react-latex-next';
 import { BookOpenText, Calculator, GraduationCap, Video } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { ClaseState } from '../../store/slices/clase';
+import { useCanvasResize } from '../../hooks/useCanvasResize';
+import Diapositiva from './Diapositiva';
+
 
 const Clases = () => {
+
+    const { curso } = useSelector(
+        (state: RootState) => state.curso
+    );
 
     const { capitulo } = useSelector(
         (state: RootState) => state.capitulo
@@ -25,17 +32,35 @@ const Clases = () => {
         (state: RootState) => state.tema
     );
 
+    useCanvasResize([capitulo, temas, clases]);
 
     const [clasesCapitulo, setClasesCapitulo] = useState<Array<ClaseState>>([{ id: '', curso_id: '', capitulo_id: '', nombre: '', numero: 0, activo: false }]);
-
     const [modalVideo, setModalVideo] = useState({ url: "", titulo: "", isOpen: false });
     const [modalQuiz, setModalQuiz] = useState({ content_id: 0, titulo: "", isOpen: false });
-    const [modalDiapositiva, setModalDiapositiva] = useState({ content_id: 0, titulo: "", url: "", isOpen: false });
+    const [modalDiapositiva, setModalDiapositiva] = useState({ id: '', autor: '', diapositivas: [{ pagina: 0, contenido: '' }], activo: false, isOpen: false });
 
     useEffect(() => {
         const clasesFiltradas = clases.filter(item => item.capitulo_id === capitulo.id);
         setClasesCapitulo(clasesFiltradas);
     }, [clases, capitulo.id])
+
+    const handleModalDiapositiva = (diapositiva: { id: string, autor: string, diapositivas: [{ pagina: number, contenido: string }], activo: boolean }) => {
+
+        console.log(diapositiva)
+
+        if (diapositiva.id !== '') {
+            setModalDiapositiva({
+                id: diapositiva.id,
+                autor: diapositiva.autor,
+                diapositivas: diapositiva.diapositivas,
+                activo: diapositiva.activo,
+                isOpen: true
+            });
+        }
+        // if (diapositivas && diapositivas.diapositivas && diapositivas.diapositivas.length > 0) {
+        //     setModalDiapositiva({ diapositivas: diapositivas, isOpen: true });
+        // }
+    }
 
     return (
         <>
@@ -43,17 +68,17 @@ const Clases = () => {
                 modalDiapositiva.isOpen &&
                 <Modal
                     isOpen={modalDiapositiva.isOpen}
-                    onClose={() => setModalDiapositiva({ content_id: 0, titulo: "", url: "", isOpen: false })}
-                    title={modalDiapositiva.titulo}
+                    onClose={() => setModalDiapositiva({ id: '', autor: '', diapositivas: [{ pagina: 0, contenido: '' }], activo: false, isOpen: false })}
+                    title={`Capítulo: ${capitulo.nombre}`}
                     size="full"
+                    className='bg-[#f7f3de]'
                 >
-                    <iframe
-                        src={modalDiapositiva.url}
-                        width="100%"
-                        height="600px"
-                        allowFullScreen
-                        title={modalDiapositiva.titulo}
-                    ></iframe>
+
+                    <Diapositiva 
+                        curso={curso}
+                        capitulo={capitulo}
+                        diapositivas={modalDiapositiva.diapositivas}
+                    />
                 </Modal>
             }
 
@@ -64,6 +89,7 @@ const Clases = () => {
                     onClose={() => setModalVideo({ url: "", titulo: "", isOpen: false })}
                     title={modalVideo.titulo}
                     size="full"
+                    className='background-chapter-600'
                 >
                     <VideoPlayer
                         url={modalVideo.url}
@@ -76,7 +102,6 @@ const Clases = () => {
                             title: true,
                             byline: true,
                             portrait: true,
-
                         }}
                     />
                 </Modal>
@@ -89,6 +114,7 @@ const Clases = () => {
                     onClose={() => setModalQuiz({ content_id: 0, titulo: "", isOpen: false })}
                     // title={"Ejercicio: " + modalQuiz.titulo}
                     size="full"
+                    className='background-chapter-600'
                 >
                     <Question content_id={modalQuiz.content_id} />
                 </Modal>
@@ -120,7 +146,7 @@ const Clases = () => {
                                                 <div className="w-full lg:w-1/5 sm:w-1/2 p-2">
                                                     <div className="flex items-center">
                                                         <Button
-                                                            // onClick={() => setModalDiapositiva({ content_id: actividades.length > 0 ? actividades[0].content_id : 0, titulo: tema.title, url: actividades.length > 0 ? actividades[0].external_url : '', isOpen: true })}
+                                                            onClick={() => handleModalDiapositiva(tema.diapositiva)}
                                                             icon={BookOpenText}
                                                             variant="warning"
                                                             size="sm"

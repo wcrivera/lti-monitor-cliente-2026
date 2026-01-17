@@ -4,15 +4,13 @@ import { AppDispatch } from "../../store";
 
 import { endLoadingAyudantia, setAyudantias } from "./ayudantiaSlice";
 
-export const obtenerAyudantiasModulo = (course_id: number, module_id: number) => {
+export const obtenerAyudantiasCapitulo = (capitulo_id: string) => {
 
     return async (dispatch: AppDispatch) => {
 
         try {
-            const resp = await fetchConToken(`ayudantia/obtener/${course_id}/${module_id}`);
+            const resp = await fetchConToken(`ayudantia/obtener/${capitulo_id}`);
             const body = await resp.json();
-
-            console.log(body)
 
             if (body.ok) {
                 const { ayudantias } = body;

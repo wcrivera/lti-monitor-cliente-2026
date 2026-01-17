@@ -2,30 +2,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { useCanvasResize } from "../../hooks/useCanvasResize";
 import { useEffect } from "react";
-import { obtenerAyudantiasCapitulo } from "../../store/slices/ayudantia";
-import Ayudantia from "./Ayudantia";
+import Ejercicio from "./Ejercicio";
+import { obtenerEjerciciosCapitulo } from "../../store/slices/ejercicio";
 
-const Ayudantias = () => {
+const Ejercicios = () => {
 
     const dispatch = useDispatch<AppDispatch>();
 
     const { capitulo } = useSelector((state: RootState) => state.capitulo);
-    const { ayudantias } = useSelector((state: RootState) => state.ayudantia);
+    const { ejercicios } = useSelector((state: RootState) => state.ejercicio);
 
-    useCanvasResize([capitulo, ayudantias]);
+    useCanvasResize([capitulo, ejercicios]);
 
     useEffect(() => {
         if (capitulo.id) {
-            dispatch(obtenerAyudantiasCapitulo(capitulo.id));
+            dispatch(obtenerEjerciciosCapitulo(capitulo.id));
         }
     }, [dispatch, capitulo.id])
 
     return (
         <>
             {
-                ayudantias.map((item, index) => {
+                ejercicios.map((item, index) => {
                     return (
-                        <Ayudantia ayudantia={item} index={index} key={item.id} />
+                        <Ejercicio ejercicio={item} index={index} key={item.id} />
                     )
                 })
             }
@@ -33,4 +33,4 @@ const Ayudantias = () => {
     )
 }
 
-export default Ayudantias
+export default Ejercicios

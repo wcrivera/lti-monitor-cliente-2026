@@ -12,8 +12,6 @@ export const obtenerTemasCapitulo = (capitulo_id: string) => {
             const resp = await fetchCanvas(`tema/obtener/${capitulo_id}`);
             const body = await resp.json();
 
-            console.log(body)
-
             if (body.ok) {
                 const { temas } = body;
                 dispatch(setTemas(temas))

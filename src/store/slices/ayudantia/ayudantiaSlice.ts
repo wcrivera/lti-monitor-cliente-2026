@@ -2,17 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 // import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface AyudantiaState {
-    id: number
-    indent: number
-    content_id: number
-    module_id: number
-    position: number
-    published: boolean
-    title: string
-    type: string
-    unpublishable: boolean
-    external_url: string
-    html_url: string
+    id: string
+    curso_id: string
+    capitulo_id: string
+    numero: number;
+    enunciado: string;
+    solucion: string;
+    video: string;
+    ejercicio: { enunciado: string; alternativas: [{ letra: string; texto: string; correcta: boolean }] };
 }
 
 export interface AyudantiasState {
@@ -22,8 +19,8 @@ export interface AyudantiasState {
 }
 
 const initialState: AyudantiasState = {
-    ayudantias: [{id: 0, indent: 0, content_id: 0, module_id: 0, type: '', unpublishable: false, position: 0, published: false, title: '', external_url: '', html_url: ''}], 
-    ayudantia: {id: 0, indent: 0, content_id: 0, module_id: 0, type: '', unpublishable: false, position: 0, published: false, title: '', external_url: '', html_url: ''},
+    ayudantias: [{ id: "", curso_id: "", capitulo_id: "", numero: 0, enunciado: '', solucion: '', video: '', ejercicio: { enunciado: '', alternativas: [{ letra: '', texto: '', correcta: false }] } }],
+    ayudantia: { id: "", curso_id: "", capitulo_id: "", numero: 0, enunciado: '', solucion: '', video: '', ejercicio: { enunciado: '', alternativas: [{ letra: '', texto: '', correcta: false }] } },
     isLoading: true
 }
 
