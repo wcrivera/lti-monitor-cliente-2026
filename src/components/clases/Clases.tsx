@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 // import { BloqueState } from '../../store/slices/bloque';
 
-import Modal from '../common/Modal';
 import { VideoPlayer } from '../ui/Video';
 import Question from './Question';
 import Latex from 'react-latex-next';
@@ -12,6 +11,8 @@ import { Button } from '../ui/Button';
 import { ClaseState } from '../../store/slices/clase';
 import { useCanvasResize } from '../../hooks/useCanvasResize';
 import Diapositiva from './Diapositiva';
+import { Modal } from '../ui/Modal';
+import { DiapositivaState, PreguntaState, VideoState } from '../../store/slices/tema';
 
 
 const Clases = () => {
@@ -35,31 +36,31 @@ const Clases = () => {
     useCanvasResize([capitulo, temas, clases]);
 
     const [clasesCapitulo, setClasesCapitulo] = useState<Array<ClaseState>>([{ id: '', curso_id: '', capitulo_id: '', nombre: '', numero: 0, activo: false }]);
-    const [modalVideo, setModalVideo] = useState({ url: "", titulo: "", isOpen: false });
-    const [modalQuiz, setModalQuiz] = useState({ content_id: 0, titulo: "", isOpen: false });
-    const [modalDiapositiva, setModalDiapositiva] = useState({ id: '', autor: '', diapositivas: [{ pagina: 0, contenido: '' }], activo: false, isOpen: false });
+    const [modalVideo, setModalVideo] = useState<VideoState & { isOpen: boolean }>({ id: '', url: '', activo: false, isOpen: false });
+    const [modalQuiz, setModalQuiz] = useState<PreguntaState & { isOpen: boolean }>({ id: "", numero: 0, enunciado: "", solucion: "", video: "", alternativas: [] as { letra: string; texto: string; correcta: boolean }[], activo: false, isOpen: false });
+    const [modalDiapositiva, setModalDiapositiva] = useState<DiapositivaState & { isOpen: boolean }>({ id: '', autor: '', diapositivas: [{ pagina: 0, contenido: '' }], activo: false, isOpen: false });
 
     useEffect(() => {
         const clasesFiltradas = clases.filter(item => item.capitulo_id === capitulo.id);
         setClasesCapitulo(clasesFiltradas);
     }, [clases, capitulo.id])
 
-    const handleModalDiapositiva = (diapositiva: { id: string, autor: string, diapositivas: [{ pagina: number, contenido: string }], activo: boolean }) => {
-
-        console.log(diapositiva)
-
+    const handleModalDiapositiva = (diapositiva: DiapositivaState) => {
         if (diapositiva.id !== '') {
             setModalDiapositiva({
-                id: diapositiva.id,
-                autor: diapositiva.autor,
-                diapositivas: diapositiva.diapositivas,
-                activo: diapositiva.activo,
+                ...diapositiva,
                 isOpen: true
             });
         }
-        // if (diapositivas && diapositivas.diapositivas && diapositivas.diapositivas.length > 0) {
-        //     setModalDiapositiva({ diapositivas: diapositivas, isOpen: true });
-        // }
+    }
+
+    const handleModalQuiz = (pregunta: PreguntaState) => {
+        if (pregunta.id !== '') {
+            setModalQuiz({
+                ...pregunta,
+                isOpen: true
+            });
+        }
     }
 
     return (
@@ -72,9 +73,13 @@ const Clases = () => {
                     title={`Capítulo: ${capitulo.nombre}`}
                     size="full"
                     className='bg-[#f7f3de]'
+                    fullContent
+
+
+
                 >
 
-                    <Diapositiva 
+                    <Diapositiva
                         curso={curso}
                         capitulo={capitulo}
                         diapositivas={modalDiapositiva.diapositivas}
@@ -86,10 +91,9 @@ const Clases = () => {
                 modalVideo.isOpen &&
                 <Modal
                     isOpen={modalVideo.isOpen}
-                    onClose={() => setModalVideo({ url: "", titulo: "", isOpen: false })}
-                    title={modalVideo.titulo}
+                    onClose={() => setModalVideo({ id: '', url: '', activo: false, isOpen: false })}
                     size="full"
-                    className='background-chapter-600'
+                    fullContent
                 >
                     <VideoPlayer
                         url={modalVideo.url}
@@ -111,12 +115,17 @@ const Clases = () => {
                 modalQuiz.isOpen &&
                 <Modal
                     isOpen={modalQuiz.isOpen}
-                    onClose={() => setModalQuiz({ content_id: 0, titulo: "", isOpen: false })}
+                    onClose={() => setModalQuiz({ id: "", numero: 0, enunciado: "", solucion: "", video: "", alternativas: [], activo: false, isOpen: false })}
                     // title={"Ejercicio: " + modalQuiz.titulo}
-                    size="full"
+                    size="xl"
                     className='background-chapter-600'
+
+                    closeOnEscape={false}
+                    closeOnClickOutside={false}
+                    showCloseButton={false}
+                    fullContent
                 >
-                    <Question content_id={modalQuiz.content_id} />
+                    <Question pregunta={modalQuiz} setModalQuiz={setModalQuiz} />
                 </Modal>
             }
 
@@ -150,6 +159,7 @@ const Clases = () => {
                                                             icon={BookOpenText}
                                                             variant="warning"
                                                             size="sm"
+                                                            disabled={tema.diapositiva.id === ""}
                                                         />
                                                         <div className="ml-3 text-sm text-chapter-600">Diapositiva</div>
                                                     </div>
@@ -157,10 +167,11 @@ const Clases = () => {
                                                 <div className="w-full lg:w-1/5 sm:w-1/2 p-2">
                                                     <div className="flex items-center">
                                                         <Button
-                                                            // onClick={() => setModalVideo({ url: actividades.length > 1 ? actividades[1].title : '', titulo: tema.title, isOpen: true })}
+                                                            onClick={() => setModalVideo({ id: tema.video.id, url: tema.video.url, activo: tema.video.activo, isOpen: true })}
                                                             icon={Video}
                                                             variant="danger"
                                                             size="sm"
+                                                            disabled={tema.video.id === ""}
                                                         />
                                                         <div className="ml-3 text-sm text-chapter-600">Video</div>
                                                     </div>
@@ -169,9 +180,11 @@ const Clases = () => {
                                                     <div className="flex items-center">
                                                         <Button
                                                             // onClick={() => setModalQuiz({ content_id: actividades.length > 2 ? actividades[2].content_id : 0, titulo: tema.title, isOpen: true })}
+                                                            onClick={() => handleModalQuiz(tema.preguntas[0])}
                                                             icon={Calculator}
                                                             variant="primary"
                                                             size="sm"
+                                                            disabled={tema.preguntas[0].id === ""}
                                                         />
                                                         <div className="ml-3 text-sm text-chapter-600">Ejercicio</div>
                                                     </div>
@@ -199,7 +212,5 @@ const Clases = () => {
         </>
     )
 }
-
-
 
 export default Clases

@@ -1,6 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import type { PayloadAction } from '@reduxjs/toolkit';
 
+
+export interface DiapositivaState {
+    id: string;
+    autor: string;
+    diapositivas: Array<{ pagina: number; contenido: string }>;
+    activo: boolean;
+}
+
+export interface VideoState {
+    id: string;
+    url: string;
+    activo: boolean;
+}
+
+export interface PreguntaState {
+    id: string;
+    numero: number;
+    enunciado: string;
+    solucion: string;
+    video: string;
+    alternativas: Array<{ letra: string; texto: string; correcta: boolean }>;
+    activo: boolean;
+}
+
 export interface TemaState {
     id: string
     curso_id: string
@@ -9,26 +33,9 @@ export interface TemaState {
     nombre: string
     numero: number
     activo: boolean
-    diapositiva: {
-        id: string;
-        autor: string;
-        diapositivas: [{ pagina: number; contenido: string }];
-        activo: boolean;
-    },
-    videos: {
-        id: string;
-        url: string;
-        activo: boolean;
-    },
-    preguntas: {
-        id: string;
-        numero: number;
-        enunciado: string;
-        solucion: string;
-        video: string;
-        alternativas: [{ letra: string; texto: string; correcta: boolean }];
-        activo: boolean;
-    }
+    diapositiva: DiapositivaState,
+    video: VideoState,
+    preguntas: Array<PreguntaState>
 }
 
 export interface TemasState {
@@ -52,12 +59,12 @@ const initialState: TemasState = {
             diapositivas: [{ pagina: 0, contenido: '' }],
             activo: false,
         },
-        videos: {
+        video: {
             id: '',
             url: '',
             activo: false,
         },
-        preguntas: {
+        preguntas: [{
             id: '',
             numero: 0,
             enunciado: '',
@@ -65,7 +72,7 @@ const initialState: TemasState = {
             video: '',
             alternativas: [{ letra: '', texto: '', correcta: false }],
             activo: false,
-        }
+        }]
     },],
     tema: {
         id: '',
@@ -81,12 +88,12 @@ const initialState: TemasState = {
             diapositivas: [{ pagina: 0, contenido: '' }],
             activo: false,
         },
-        videos: {
+        video: {
             id: '',
             url: '',
             activo: false,
         },
-        preguntas: {
+        preguntas: [{
             id: '',
             numero: 0,
             enunciado: '',
@@ -94,7 +101,7 @@ const initialState: TemasState = {
             video: '',
             alternativas: [{ letra: '', texto: '', correcta: false }],
             activo: false,
-        }
+        }]
     },
     isLoading: true
 }

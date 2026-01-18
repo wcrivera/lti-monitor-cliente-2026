@@ -1,4 +1,7 @@
+// src/components/ui/Modal/index.ts
+// ============================================================================
+// MODAL - EXPORTS
+// ============================================================================
+
 export { Modal } from './Modal';
-export { ModalHeader, ModalBody, ModalFooter } from './ModalParts';
-export type { ModalProps, ModalHeaderProps, ModalBodyProps, ModalFooterProps, ModalSize } from './types';
-export { SIZE_CONFIG } from './modalStyles';
+export type { ModalProps, ModalSize } from './Modal';

@@ -31,7 +31,7 @@ const Diapositiva = ({ curso, capitulo, diapositivas }: Props) => {
         if (!deckDivRef.current) return;
 
         deckRef.current = new Reveal(deckDivRef.current, {
-            hash: true,
+            hash: false,
             controlsLayout: "edges",
             center: false,
             backgroundTransition: "slide",
@@ -60,11 +60,15 @@ const Diapositiva = ({ curso, capitulo, diapositivas }: Props) => {
                 console.warn("Reveal.js destroy failed:", e);
             }
         };
-    }, []);
+    }, [isInitializedRef, deckDivRef, deckRef, diapositivas]);
+
+    // console.log(deckDivRef.current?.clientHeight, deckDivRef.current?.clientWidth, isInitializedRef) 
+
+    // console.log(deckRef.current)
 
     return (
         <div
-            style={{ height: "85vh" }}
+            style={{ width: "100%", height: "650px", backgroundColor: "#f7f3de" }}
             className="reveal"
             ref={deckDivRef}
         >
