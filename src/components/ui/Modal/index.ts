@@ -1,7 +1,4 @@
 // src/components/ui/Modal/index.ts
-// ============================================================================
-// MODAL - EXPORTS
-// ============================================================================
-
-export { Modal } from './Modal';
+export { Modal, default } from './Modal';
+export { ModalPortal } from './ModalPortal';
 export type { ModalProps, ModalSize } from './Modal';

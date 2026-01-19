@@ -1,4 +1,3 @@
-import React from 'react'
 import { VideoPlayer } from '../ui/Video'
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
