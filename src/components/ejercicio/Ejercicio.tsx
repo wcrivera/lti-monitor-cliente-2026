@@ -1,17 +1,36 @@
-import { BookOpenText, Calculator, Pencil, Video } from 'lucide-react'
+import { BookOpenText, Calculator, CheckCircle, Pencil, Video, XCircle } from 'lucide-react'
 import { Button } from '../ui/Button'
 import Latex from 'react-latex-next'
-import { EjercicioState } from '../../store/slices/ejercicio'
+import { EjercicioState, setEjercicio } from '../../store/slices/ejercicio'
+import { AppDispatch } from '../../store'
+import { useDispatch } from 'react-redux'
 
 type Props = {
     ejercicio: EjercicioState
     index: number
-    // setModalVideo: (modal: { url: string; titulo: string; isOpen: boolean }) => void
-    // setModalQuiz: (modal: { content_id: number; titulo: string; isOpen: boolean }) => void
-    // setModalDiapositiva: (modal: { content_id: number; titulo: string; url: string; isOpen: boolean }) => void
+    setModalVideo: (modal: { isOpen: boolean }) => void
+    setmodalSolucion: (modal: { isOpen: boolean }) => void
+    setModalQuiz: (modal: { isOpen: boolean }) => void
 }
 
-const Ejercicio = ({ ejercicio, index }: Props) => {
+const Ejercicio = ({ ejercicio, index, setModalVideo, setmodalSolucion, setModalQuiz }: Props) => {
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    const handleSolucion = () => {
+        dispatch(setEjercicio(ejercicio));
+        setmodalSolucion({ isOpen: true })
+    }
+
+    const handleVideo = () => {
+        dispatch(setEjercicio(ejercicio));
+        setModalVideo({ isOpen: true })
+    }
+
+    const handleQuiz = () => {
+        dispatch(setEjercicio(ejercicio));
+        setModalQuiz({ isOpen: true })
+    }
     return (
         <>
             <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm border border-gray-300 mb-4">
@@ -28,7 +47,8 @@ const Ejercicio = ({ ejercicio, index }: Props) => {
                             <div className="flex flex-wrap justify-end items-center">
                                 <div className="flex items-center mr-2">
                                     <Button
-                                        // onClick={() => setModalDiapositiva({ content_id: actividades.length > 0 ? actividades[0].content_id : 0, titulo: tema.title, url: actividades.length > 0 ? actividades[0].external_url : '', isOpen: true })}
+                                        disabled={ejercicio.solucion === '' || ejercicio.solucion === null || ejercicio.solucion === undefined}
+                                        onClick={handleSolucion}
                                         icon={BookOpenText}
                                         variant="warning"
                                         size="sm"
@@ -36,32 +56,33 @@ const Ejercicio = ({ ejercicio, index }: Props) => {
                                 </div>
                                 <div className="flex items-center mr-2">
                                     <Button
-                                        // onClick={() => setModalVideo({ url: actividades.length > 1 ? actividades[1].title : '', titulo: tema.title, isOpen: true })}
+                                        disabled={ejercicio.video === '' || ejercicio.video === null || ejercicio.video === undefined}
+                                        onClick={handleVideo}
                                         icon={Video}
                                         variant="danger"
                                         size="sm"
                                     />
                                 </div>
                                 <div className="flex items-center">
-                                    <Button
-                                        // onClick={() => setModalQuiz({ content_id: actividades.length > 2 ? actividades[2].content_id : 0, titulo: tema.title, isOpen: true })}
-                                        icon={Calculator}
-                                        variant="primary"
-                                        size="sm"
-                                    />
+                                    <div className="relative">
+                                        <Button
+                                            // onClick={() => setModalQuiz({ content_id: actividades.length > 2 ? actividades[2].content_id : 0, titulo: tema.title, isOpen: true })}
+                                            onClick={handleQuiz}
+                                            icon={Calculator}
+                                            variant="primary"
+                                            size="sm"
+                                            disabled={
+                                                ejercicio.enunciado === ""}
+                                        />
+                                        {
+                                            ejercicio.score === 1 && <CheckCircle className="absolute -top-2 -right-2 w-6 h-6 text-green-500 bg-white rounded-full" />
+                                        }
+                                        {
+                                            ejercicio.score === 0 && <XCircle className="absolute -top-2 -right-2 w-6 h-6 text-red-500 bg-white rounded-full" />
+                                        }
+                                    </div>
+                                    <div className="ml-3 text-sm text-chapter-600">Ejercicio</div>
                                 </div>
-
-                                {/* <div className="w-full lg:w-2/5 sm:w-1/2 p-2 flex justify-end "> */}
-                                {/* {
-                                                        (score && score.id !== 0) ? (score.score === 0 ? (
-                                                            <CircleX className="text-red-500" />
-                                                        ) : (
-                                                            <CircleCheck className="text-green-500" />
-                                                        )) : (
-                                                            <Circle className="text-gray-500" />
-                                                        )
-                                                    } */}
-
                             </div>
                         </div>
                     </div>

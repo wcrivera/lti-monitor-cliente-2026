@@ -11,15 +11,19 @@ import "../../css/diapositivas.css";
 import "reveal.js/dist/reveal.css";
 import { CursoState } from "../../store/slices/curso";
 import { CapituloState } from "../../store/slices/capitulo";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 type Props = {
     curso: CursoState;
     capitulo: CapituloState
-    diapositivas: Array<{ pagina: number; contenido: string }>;
 };
-const Diapositiva = ({ curso, capitulo, diapositivas }: Props) => {
+const Diapositiva = ({ curso, capitulo }: Props) => {
 
-    console.log(diapositivas)
+    const { diapositiva } = useSelector(
+        (state: RootState) => state.diapositiva
+    );
+    
     const deckDivRef = useRef<HTMLDivElement>(null);
     const deckRef = useRef<Reveal.Api | null>(null);
     const isInitializedRef = useRef(false);
@@ -60,7 +64,7 @@ const Diapositiva = ({ curso, capitulo, diapositivas }: Props) => {
                 console.warn("Reveal.js destroy failed:", e);
             }
         };
-    }, [isInitializedRef, deckDivRef, deckRef, diapositivas]);
+    }, [isInitializedRef, deckDivRef, deckRef, diapositiva]);
 
     // console.log(deckDivRef.current?.clientHeight, deckDivRef.current?.clientWidth, isInitializedRef) 
 
@@ -68,7 +72,7 @@ const Diapositiva = ({ curso, capitulo, diapositivas }: Props) => {
 
     return (
         <div
-            style={{ width: "100%", height: "650px", backgroundColor: "#f7f3de" }}
+            style={{ width: "100%", height: "650px", backgroundColor: "#f7f3de"}}
             className="reveal"
             ref={deckDivRef}
         >
@@ -76,6 +80,7 @@ const Diapositiva = ({ curso, capitulo, diapositivas }: Props) => {
                 {/* Portada */}
                 <section
                     data-transition="fade" className="center"
+                    style={{padding: "20px"}}
                 >
                     <div className="grid grid-cols-9 gap-4">
                         <div className="col-span-5">
@@ -93,13 +98,13 @@ const Diapositiva = ({ curso, capitulo, diapositivas }: Props) => {
                 </section>
 
                 {/* Diapositivas */}
-                {diapositivas.map((item) => {
+                {diapositiva.diapositivas.map((item) => {
                     const { pagina, contenido } = item;
                     return (
                         <section
                             data-transition="fade"
                             data-align="center"
-                            style={{ display: "block", textAlign: "justify" }}
+                            style={{ display: "block", textAlign: "justify", padding: "20px" }}
                             key={pagina}
                         >
                             <Latex>{contenido}</Latex>

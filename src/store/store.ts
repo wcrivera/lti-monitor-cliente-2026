@@ -28,7 +28,7 @@ import { grupoSlice } from "./slices/grupo";
 
 import { noticiaSlice } from "./slices/noticia";
 
-import { quizSlice } from "./slices/quiz";
+import { scoreSlice } from "./slices/score";
 
 import { bloqueSlice } from "./slices/bloque";
 import { seccionSlice } from "./slices/seccion";
@@ -96,7 +96,7 @@ export const store = configureStore({
 
     socket: socketSlice.reducer,
 
-    quiz: quizSlice.reducer,
+    score: scoreSlice.reducer,
   },
 });
 

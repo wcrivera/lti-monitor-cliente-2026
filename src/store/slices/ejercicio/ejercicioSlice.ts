@@ -8,8 +8,12 @@ export interface EjercicioState {
   numero: number;
   multiple: { estado: boolean; columnas: number };
   enunciado: string;
+  solucion: string;
+  video: string;
   nota: string;
   activo: boolean;
+  alternativas: Array<{ letra: string; texto: string; correcta: boolean }>;
+  score: null | number;
 }
 
 export interface EjerciciosState {
@@ -26,8 +30,12 @@ const initialState: EjerciciosState = {
     numero: 0,
     multiple: { estado: false, columnas: 0 },
     enunciado: "",
+    solucion: "",
+    video: "",
     nota: "",
     activo: false,
+    score: null,
+    alternativas: [{ letra: "", texto: "", correcta: false }],
   },
   ejercicios: [{
     id: "",
@@ -36,8 +44,12 @@ const initialState: EjerciciosState = {
     numero: 0,
     multiple: { estado: false, columnas: 0 },
     enunciado: "",
+    solucion: "",
+    video: "",
     nota: "",
     activo: false,
+    score: null,
+    alternativas: [{ letra: "", texto: "", correcta: false }],
   }],
   isLoading: true,
 };

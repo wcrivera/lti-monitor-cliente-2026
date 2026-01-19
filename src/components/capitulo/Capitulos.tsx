@@ -1,20 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { useEffect } from 'react';
 import { Button } from '../ui/Button';
 import Latex from 'react-latex-next';
-import { obtenerCapitulosCurso, setCapitulo, startLoadingCapitulo } from '../../store/slices/capitulo';
-import { obtenerClasesCurso } from '../../store/slices/clase';
+import { setCapitulo } from '../../store/slices/capitulo';
 
 const Capitulos = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-
-    const { curso } = useSelector(
-        (state: RootState) => state.curso
-    );
 
     const { capitulos, isLoading: isLoadingCapitulos } = useSelector(
         (state: RootState) => state.capitulo
@@ -23,14 +17,6 @@ const Capitulos = () => {
     const { clases, isLoading: isLoadingClases } = useSelector(
         (state: RootState) => state.clase
     );
-
-    useEffect(() => {
-        if (curso.id !== '') {
-            dispatch(startLoadingCapitulo());
-            dispatch(obtenerCapitulosCurso(curso.id));
-            dispatch(obtenerClasesCurso(curso.id));
-        }
-    }, [dispatch, curso])
 
     if (isLoadingCapitulos || isLoadingClases) {
         return (
@@ -46,11 +32,11 @@ const Capitulos = () => {
     const handleChangeChapter = (capitulo_id: string) => {
         const selectedCapitulo = capitulos.find(capitulo => capitulo.id === capitulo_id);
         if (selectedCapitulo) {
-            const params = new URLSearchParams(window.location.search);
-            const course_id = params.get('course_id');
-            const user_id = params.get('user_id');
+            const courseIdParam = sessionStorage.getItem('lti_course_id');
+            const userIdParam = sessionStorage.getItem('lti_user_id');
+            sessionStorage.setItem('lti_chapter_id', capitulo_id);
             dispatch(setCapitulo(selectedCapitulo));
-            navigate(`/curso/capitulo?user_id=${user_id}&course_id=${course_id}&chapter_id=${capitulo_id}`);
+            navigate(`/curso/capitulo?user_id=${userIdParam}&course_id=${courseIdParam}&chapter_id=${capitulo_id}`);
         }
     }
 

@@ -40,8 +40,6 @@ export const obtenerTemaCurso = (course_id: string, number: number) => {
             const resp = await fetchCanvas(`tema/obtener/${course_id}/${number}`);
             const body = await resp.json();
 
-            console.log(body)
-
             if (body.ok) {
                 const { tema } = body;
                 dispatch(setTema(tema))

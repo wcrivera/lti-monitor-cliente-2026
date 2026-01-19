@@ -4,14 +4,14 @@ import { Circle, CircleCheck, CircleX, Target, } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { crearScore } from '../../store/slices/score';
+import { crearScoreEjercicio } from '../../store/slices/ejercicio';
 
 const Question = () => {
 
     const dispatch = useDispatch<AppDispatch>();
 
-    const { pregunta } = useSelector(
-        (state: RootState) => state.pregunta
+    const { ejercicio } = useSelector(
+        (state: RootState) => state.ejercicio
     );
 
     const [alternativa, setAlternativa] = useState({ letra: '', texto: '', correcta: false });
@@ -20,46 +20,45 @@ const Question = () => {
 
     const handleSendAnswer = async () => {
         setLoading(true);
-        dispatch(crearScore(pregunta.id, alternativa.correcta ? 1 : 0))
+        dispatch(crearScoreEjercicio(ejercicio.id, alternativa.correcta ? 1 : 0))
     }
 
     return (
         <>
-            {/* <div className="p-6 bg-white rounded-lg shadow-md"> */}
             <div className='flex justify-start items-center border-b border-gray-200'>
                 <div className="py-6 pl-6 pr-2">
                     {
-                        pregunta.score === null &&
+                        ejercicio.score === null &&
                         <Circle className="text-gray-500" />
                     }
                     {
-                        pregunta.score === 1 &&
+                        ejercicio.score === 1 &&
                         <CircleCheck className="text-green-500" />
                     }
                     {
-                        pregunta.score === 0 &&
+                        ejercicio.score === 0 &&
                         <CircleX className="text-red-500" />
                     }
                 </div>
                 <div className="py-6 font-bold text-chapter-600">
-                    Pregunta {pregunta.numero}
+                    Pregunta {ejercicio.numero}
                 </div>
             </div>
 
             <div className="pb-10 pt-6 px-6 border-b border-gray-200">
-                <Latex>{pregunta.enunciado}</Latex>
+                <Latex>{ejercicio.enunciado}</Latex>
             </div>
 
 
             {
-                pregunta.alternativas.map((item) => {
+                ejercicio.alternativas.map((item) => {
                     return (
                         <div key={item.letra} className=" border-b border-gray-200">
                             <div className="p-6 flex items-center py-4 hover:bg-gray-50" >
                                 <div className="w-6 h-6 flex items-center justify-center mr-4">
                                     <Button
                                         onClick={() => setAlternativa({ letra: item.letra, texto: item.texto, correcta: item.correcta })}
-                                        disabled={loading || pregunta.score !== null}
+                                        disabled={loading || ejercicio.score !== null}
                                         icon={item.letra === alternativa.letra ? Target : Circle}
                                         variant="ghost"
                                         size="sm"

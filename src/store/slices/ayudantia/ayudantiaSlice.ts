@@ -10,6 +10,7 @@ export interface AyudantiaState {
     solucion: string;
     video: string;
     ejercicio: { enunciado: string; alternativas: [{ letra: string; texto: string; correcta: boolean }] };
+    score: null | number;
 }
 
 export interface AyudantiasState {
@@ -19,8 +20,8 @@ export interface AyudantiasState {
 }
 
 const initialState: AyudantiasState = {
-    ayudantias: [{ id: "", curso_id: "", capitulo_id: "", numero: 0, enunciado: '', solucion: '', video: '', ejercicio: { enunciado: '', alternativas: [{ letra: '', texto: '', correcta: false }] } }],
-    ayudantia: { id: "", curso_id: "", capitulo_id: "", numero: 0, enunciado: '', solucion: '', video: '', ejercicio: { enunciado: '', alternativas: [{ letra: '', texto: '', correcta: false }] } },
+    ayudantias: [{ id: "", curso_id: "", capitulo_id: "", numero: 0, enunciado: '', solucion: '', video: '', ejercicio: { enunciado: '', alternativas: [{ letra: '', texto: '', correcta: false }] }, score: null }],
+    ayudantia: { id: "", curso_id: "", capitulo_id: "", numero: 0, enunciado: '', solucion: '', video: '', ejercicio: { enunciado: '', alternativas: [{ letra: '', texto: '', correcta: false }] }, score: null },
     isLoading: true
 }
 

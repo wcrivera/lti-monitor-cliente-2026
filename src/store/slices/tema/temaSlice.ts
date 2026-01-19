@@ -22,6 +22,7 @@ export interface PreguntaState {
     solucion: string;
     video: string;
     alternativas: Array<{ letra: string; texto: string; correcta: boolean }>;
+    score: null | number;
     activo: boolean;
 }
 
@@ -72,6 +73,7 @@ const initialState: TemasState = {
             video: '',
             alternativas: [{ letra: '', texto: '', correcta: false }],
             activo: false,
+            score: null
         }]
     },],
     tema: {
@@ -101,6 +103,7 @@ const initialState: TemasState = {
             video: '',
             alternativas: [{ letra: '', texto: '', correcta: false }],
             activo: false,
+            score: null
         }]
     },
     isLoading: true

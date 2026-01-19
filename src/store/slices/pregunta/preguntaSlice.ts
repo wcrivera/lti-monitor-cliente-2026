@@ -2,29 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 // import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface PreguntaState {
-    cid: string
-    mid: string
-    eid: string
-    pid: string
-    numero: number
-    tipo: string
-    enunciado: string
-    titulo: string
-    respuesta: string
-    inline: boolean
-    width: number
-    alternativas: Array<AlternativaState>
-}
-
-export interface OpcionState {
-    opcion: string
-    roman: string
-}
-
-export interface AlternativaState {
-    alternativa: string
-    letra: string
-    estado: boolean
+    id: string;
+    numero: number;
+    enunciado: string;
+    solucion: string;
+    video: string;
+    alternativas: Array<{ letra: string; texto: string; correcta: boolean }>;
+    score: null | number;
+    activo: boolean;
 }
 
 export interface PreguntasState {
@@ -35,20 +20,25 @@ export interface PreguntasState {
 
 const initialState: PreguntasState = {
     pregunta: {
-        cid: '',
-        mid: '',
-        eid: '',
-        pid: '',
+        id: '',
         numero: 0,
-        tipo: '',
         enunciado: '',
-        titulo: '',
-        respuesta: '',
-        inline: false,
-        width: 100,
-        alternativas: [{ alternativa: '', letra: 'A', estado: false }, { alternativa: '', letra: 'B', estado: false }, { alternativa: '', letra: 'C', estado: false }, { alternativa: '', letra: 'D', estado: false }],
+        solucion: '',
+        video: '',
+        alternativas: [{ letra: 'A', texto: '', correcta: false }, { letra: 'B', texto: '', correcta: false }, { letra: 'C', texto: '', correcta: false }, { letra: 'D', texto: '', correcta: false }],
+        score: null,
+        activo: false
     },
-    preguntas: [],
+    preguntas: [{
+        id: '',
+        numero: 0,
+        enunciado: '',
+        solucion: '',
+        video: '',
+        alternativas: [{ letra: 'A', texto: '', correcta: false }, { letra: 'B', texto: '', correcta: false }, { letra: 'C', texto: '', correcta: false }, { letra: 'D', texto: '', correcta: false }],
+        score: null,
+        activo: false
+    }],
     isLoading: true
 }
 
