@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: [
     "./index.html",
@@ -69,41 +70,3 @@ export default {
   },
   plugins: [],
 }
-
-// /** @type {import('tailwindcss').Config} */
-// export default {
-//   content: [
-//     "./index.html",
-//     "./src/**/*.{js,ts,jsx,tsx}",
-//   ],
-//   theme: {
-//     extend: {
-//       keyframes: {
-//         'modal-appear': {
-//           '0%': { opacity: '0', transform: 'scale(0.95)' },
-//           '100%': { opacity: '1', transform: 'scale(1)' }
-//         }
-//       },
-//       animation: {
-//         'modal-appear': 'modal-appear 0.2s ease-out'
-//       },
-//       colors: {
-//         'chapter-blue': '#4A6D8C',
-//         // O con variantes:
-//         'chapter': {
-//           50: '#f0f4f8',
-//           100: '#d9e4ee',
-//           200: '#b3c9dd',
-//           300: '#8daecb',
-//           400: '#6793ba',
-//           500: '#4A6D8C',  // Color principal
-//           600: '#3c5770',
-//           700: '#2e4154',
-//           800: '#1f2c38',
-//           900: '#0f161c',
-//         }
-//       }
-//     }
-//   },
-//   plugins: [],
-// }

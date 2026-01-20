@@ -9,7 +9,7 @@ import Latex from 'react-latex-next';
 import { BookOpenText, Calculator, CheckCircle, GraduationCap, Video, XCircle } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { ClaseState } from '../../store/slices/clase';
-import { useCanvasResize } from '../../hooks/useCanvasResize';
+// import { useCanvasResize } from '../../hooks/useCanvasResize';
 import Diapositiva from './Diapositiva';
 import { Modal } from '../ui/Modal';
 import { DiapositivaState, PreguntaState, VideoState } from '../../store/slices/tema';
@@ -36,7 +36,7 @@ const Clases = () => {
         (state: RootState) => state.tema
     );
 
-    useCanvasResize([capitulo, temas, clases]);
+    // useCanvasResize([capitulo, temas, clases]);
 
     const [clasesCapitulo, setClasesCapitulo] = useState<Array<ClaseState>>([{ id: '', curso_id: '', capitulo_id: '', nombre: '', numero: 0, activo: false }]);
     const [modalVideo, setModalVideo] = useState<VideoState & { isOpen: boolean }>({ id: '', url: '', activo: false, isOpen: false });

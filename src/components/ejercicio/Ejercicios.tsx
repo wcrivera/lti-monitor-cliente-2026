@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { useCanvasResize } from "../../hooks/useCanvasResize";
+// import { useCanvasResize } from "../../hooks/useCanvasResize";
 import { useEffect, useState } from "react";
 import Ejercicio from "./Ejercicio";
 import { obtenerEjerciciosCapitulo } from "../../store/slices/ejercicio";
@@ -16,6 +16,8 @@ const Ejercicios = () => {
     const { capitulo } = useSelector((state: RootState) => state.capitulo);
     const { ejercicios } = useSelector((state: RootState) => state.ejercicio);
 
+    // useCanvasResize([capitulo, ejercicios]);
+
     const [correctas, setCorrectas] = useState(0);
     const [incorrectas, setIncorrectas] = useState(0);
     const [nulas, setNulas] = useState(0);
@@ -23,8 +25,6 @@ const Ejercicios = () => {
     const [modalSolucion, setmodalSolucion] = useState({ isOpen: false });
     const [modalVideo, setModalVideo] = useState({ isOpen: false });
     const [modalQuiz, setModalQuiz] = useState({ isOpen: false });
-
-    useCanvasResize([capitulo, ejercicios]);
 
     useEffect(() => {
         if (capitulo.id) {

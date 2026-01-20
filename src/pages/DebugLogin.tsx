@@ -43,7 +43,11 @@ const DebugLogin = () => {
                 `http://localhost:3001/api/debug/token?user_id=${userId}&course_id=${courseId}`
             );
 
+            console.log(response)
+
             const data = await response.json();
+
+            console.log(data);
 
             if (data.ok) {
                 // Guardar en sessionStorage

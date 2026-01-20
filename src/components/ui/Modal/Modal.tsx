@@ -1,9 +1,9 @@
 // src/components/ui/Modal/Modal.tsx
 // ============================================================================
-// MODAL COMPONENT - SOLUCIÓN DEFINITIVA PARA IFRAME CANVAS
+// MODAL COMPONENT - SOLUCIÓN CORRECTA PARA IFRAME CANVAS
 // ============================================================================
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { ModalPortal } from './ModalPortal';
 
@@ -93,22 +93,6 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
-    const [viewportTop, setViewportTop] = useState(0);
-
-    // ============================================================================
-    // CALCULAR POSICIÓN DE VIEWPORT AL ABRIR
-    // ============================================================================
-
-    useEffect(() => {
-        if (isOpen) {
-            // ⭐ Capturar la posición actual del scroll
-            const currentScrollY = window.scrollY || window.pageYOffset;
-            setViewportTop(currentScrollY);
-
-            console.log('📍 Modal abierto - Scroll Y:', currentScrollY);
-            console.log('📍 Window inner height:', window.innerHeight);
-        }
-    }, [isOpen]);
 
     // ============================================================================
     // CLOSE ON ESCAPE
@@ -128,17 +112,27 @@ export const Modal: React.FC<ModalProps> = ({
     }, [isOpen, closeOnEscape, onClose]);
 
     // ============================================================================
-    // LOCK BODY SCROLL (SIN POSITION FIXED)
+    // PREVENT BACKGROUND SCROLL - SIN POSITION FIXED
     // ============================================================================
 
     useEffect(() => {
         if (isOpen) {
-            // ⭐ Solo bloquear scroll, NO fijar position
+            // Solo prevenir scroll, NO cambiar position del body
             const originalOverflow = document.body.style.overflow;
+            const originalPaddingRight = document.body.style.paddingRight;
+            
+            // Calcular el ancho del scrollbar
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            
+            // Aplicar estilos
             document.body.style.overflow = 'hidden';
+            if (scrollbarWidth > 0) {
+                document.body.style.paddingRight = `${scrollbarWidth}px`;
+            }
 
             return () => {
                 document.body.style.overflow = originalOverflow;
+                document.body.style.paddingRight = originalPaddingRight;
             };
         }
     }, [isOpen]);
@@ -169,24 +163,31 @@ export const Modal: React.FC<ModalProps> = ({
         <div
             ref={overlayRef}
             onClick={handleOverlayClick}
-            className={`${animationClasses.overlay} ${className}`}
             style={{
-                // ⭐⭐⭐ CRÍTICO: Position ABSOLUTE con top calculado
-                position: 'absolute',
-                top: `${viewportTop}px`, // ⭐ Posicionar en el scroll actual
+                // ⭐ CRÍTICO: Position fixed con viewport explícito
+                position: 'fixed',
+                top: 0,
                 left: 0,
-                width: '100vw',
-                height: '100vh', // ⭐ Solo cubrir el viewport visible
+                right: 0,
+                bottom: 0,
+                // width: '100vw',
+                // height: '100vh',
+                // minHeight: '100vh',
+                // maxHeight: '100vh',
                 zIndex,
                 backgroundColor: 'rgba(0, 0, 0, 0.6)',
                 backdropFilter: 'blur(4px)',
-                display: 'flex',
+                WebkitBackdropFilter: 'blur(4px)',
+                // display: 'flex',
                 alignItems: centered ? 'center' : 'flex-start',
                 justifyContent: 'center',
-                padding: '16px',
+                padding: centered ? '16px' : '64px 16px 16px 16px',
+                margin: 0,
+                overflow: 'auto',
                 boxSizing: 'border-box',
-                overflow: 'hidden',
+                WebkitOverflowScrolling: 'touch',
             }}
+            className={`${animationClasses.overlay} ${className}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby={title ? 'modal-title' : undefined}
@@ -202,14 +203,14 @@ export const Modal: React.FC<ModalProps> = ({
                         bg-white
                         rounded-xl
                         shadow-2xl
-                        overflow-hidden
                         ${animationClasses.content}
                         ${contentClassName}
                     `}
                     style={{
-                        height: height || '90vh',
+                        height: height,
                         maxHeight: '90vh',
                         overflow: 'auto',
+                        margin: 'auto',
                     }}
                     onClick={(e) => e.stopPropagation()}
                 >
@@ -262,6 +263,7 @@ export const Modal: React.FC<ModalProps> = ({
                         maxHeight: '90vh',
                         display: 'flex',
                         flexDirection: 'column',
+                        margin: 'auto',
                     }}
                     onClick={(e) => e.stopPropagation()}
                 >
@@ -322,7 +324,7 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
     );
 
-    // ⭐ RENDERIZAR EN PORTAL (dentro de #modal-root)
+    // ⭐ RENDERIZAR EN PORTAL
     return <ModalPortal>{modalContent}</ModalPortal>;
 };
 

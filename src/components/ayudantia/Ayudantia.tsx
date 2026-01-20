@@ -4,6 +4,8 @@ import { Button } from '../ui/Button'
 import Latex from 'react-latex-next'
 import { AppDispatch } from '../../store'
 import { useDispatch } from 'react-redux'
+import { Modal } from '../ui/Test/Modal'
+import { useState } from 'react'
 
 type Props = {
     ayudantia: AyudantiaState
@@ -32,8 +34,37 @@ const Ayudantia = ({ ayudantia, index, setModalVideo, setmodalSolucion, setModal
         setModalQuiz({ isOpen: true })
     }
 
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    
+        const handleConfirm = (): void => {
+            alert('¡Confirmado!');
+            setIsModalOpen(false);
+        };
+
     return (
         <>
+
+            <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+            <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-200"
+            >
+                Abrir Modal
+            </button>
+
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Título del Modal"
+                onConfirm={handleConfirm}
+                confirmText="Aceptar"
+                cancelText="Cerrar"
+            >
+                <p className="text-gray-600">
+                    El modal se cierra al hacer clic en el botón X, en el botón Cerrar, o al hacer clic fuera del contenido.
+                </p>
+            </Modal>
+        </div>
             <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm border border-gray-300 mb-4">
                 <div className="p-4 sm:px-6">
                     <div className="flex items-center">
@@ -67,7 +98,6 @@ const Ayudantia = ({ ayudantia, index, setModalVideo, setmodalSolucion, setModal
                                 <div className="flex items-center">
                                     <div className="relative">
                                         <Button
-                                            // onClick={() => setModalQuiz({ content_id: actividades.length > 2 ? actividades[2].content_id : 0, titulo: tema.title, isOpen: true })}
                                             onClick={handleQuiz}
                                             icon={Calculator}
                                             variant="primary"

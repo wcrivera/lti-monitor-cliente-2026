@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { useCanvasResize } from "../../hooks/useCanvasResize";
+// import { useCanvasResize } from "../../hooks/useCanvasResize";
 import { useEffect, useState } from "react";
 import { obtenerAyudantiasCapitulo } from "../../store/slices/ayudantia";
 import Ayudantia from "./Ayudantia";
@@ -16,7 +16,7 @@ const Ayudantias = () => {
     const { capitulo } = useSelector((state: RootState) => state.capitulo);
     const { ayudantias } = useSelector((state: RootState) => state.ayudantia);
 
-    useCanvasResize([capitulo, ayudantias]);
+    // useCanvasResize([capitulo, ayudantias]);
 
     const [modalSolucion, setmodalSolucion] = useState({ isOpen: false });
     const [modalVideo, setModalVideo] = useState({ isOpen: false });
